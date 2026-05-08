@@ -42,7 +42,18 @@ export default function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: input }),
       });
-      const data = (await res.json()) as { shortUrl?: string; error?: string };
+      const raw = await res.text();
+      let data: { shortUrl?: string; error?: string };
+      try {
+        data = JSON.parse(raw) as { shortUrl?: string; error?: string };
+      } catch {
+        const hint = raw.replace(/\s+/g, ' ').trim().slice(0, 160);
+        throw new Error(
+          res.ok
+            ? `サーバーがJSON以外を返しました（${hint || '内容なし'}）`
+            : `短縮APIに失敗しました（${res.status}）。デプロイの /api/shorten と vercel.json を確認してください。`,
+        );
+      }
       if (!res.ok) {
         throw new Error(data.error ?? '短縮に失敗しました');
       }

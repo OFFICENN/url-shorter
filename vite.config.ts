@@ -2,7 +2,7 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import type { Connect } from 'vite';
 import { defineConfig } from 'vite';
-import { shortenUrl } from './lib/shorten-url';
+import { shortenUrl } from './api/lib/shorten-url';
 
 function shortenApiMiddleware(): Connect.NextHandleFunction {
   return (req, res, next) => {

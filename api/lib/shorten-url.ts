@@ -1,4 +1,4 @@
-/** http(s) のみ許可し、is.gd の公開APIで短縮URLを取得する */
+/** http(s) のみ許可し、is.gd の公開APIで短縮URLを取得する（Vercel サーバーレス用に api 配下に複製） */
 
 export function validatePublicHttpUrl(input: string): string {
   let parsed: URL;
@@ -14,7 +14,6 @@ export function validatePublicHttpUrl(input: string): string {
 }
 
 /**
- * TinyURL の旧 api-create.php 経由のリンクは、クリック時にプレビュー待機ページが挟まることがあるため使わない。
  * @see https://www.is.gd/developers.php （format=simple）
  */
 export async function shortenUrl(longUrl: string): Promise<string> {

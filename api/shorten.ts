@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { shortenUrl } from '../lib/shorten-url';
+import { shortenUrl } from './lib/shorten-url';
 
 export default async function handler(
   req: VercelRequest,
